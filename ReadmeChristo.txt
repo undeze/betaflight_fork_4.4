@@ -36,6 +36,19 @@ git init
 
 ------------------------ Build / Make -----------------------------------
 
+https://betaflight.com/docs/development/Building-in-Ubuntu
+
+This was required initially, before I could 'make' the first time:
+~/Dev/betaflight$ make arm_sdk_install
+
+~/Dev/betaflight$ make clean TARGET=STM32F7X2
+
+Remove the /obj directory, and all its contents.
+
+~/Dev/betaflight$ make TARGET=STM32F7X2 VERSION="2023-10-22-2036"
+
+
+
 --------------- XL7 with MAMBAF722, STM32F7X7 (S7X2) --------------------
 
 /UAV/Betaflight/betaflight$ make clean TARGET=MAMBAF722
@@ -52,7 +65,7 @@ make TARGET=STM32F405 REVISION="2022-09-15-1407"
 
 See which version the code is: src/main/build/version.h
 
---------------------------------------------------------------------------
+----------------------------git-------------------------------------------
 
 ~/Dev/betaflight$ git remote -v
 origin	https://github.com/undeze/betaflight.git (fetch)
