@@ -17,7 +17,6 @@
  *
  * If not, see <http://www.gnu.org/licenses/>.
  *
- * Christo 22OCT23
  */
 
 #include <stdbool.h>

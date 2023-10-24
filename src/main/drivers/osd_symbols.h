@@ -161,3 +161,51 @@
 #define SYM_GPS_DEGREE              SYM_STICK_OVERLAY_SPRITE_HIGH  // kind of looks like the degree symbol
 #define SYM_GPS_MINUTE              0x27 // '
 #define SYM_GPS_SECOND              0x22 // "
+
+// Christo osd_symbols.h line 165 Throttle strip symbols
+// https://bflogo.ekezet.com/
+#define SYM_THR_01                  0xA0
+#define SYM_THR_02                  0xA1
+#define SYM_THR_03                  0xA2
+#define SYM_THR_04                  0xA3
+#define SYM_THR_05                  0xA4
+#define SYM_THR_06                  0xA5
+#define SYM_THR_07                  0xA6
+#define SYM_THR_08                  0xA7
+#define SYM_THR_09                  0xA8
+#define SYM_THR_10                  0xA9
+#define SYM_THR_11                  0xAA
+#define SYM_THR_12                  0xAB
+#define SYM_THR_13                  0xAC
+#define SYM_THR_14                  0xAD
+#define SYM_THR_15                  0xAE
+#define SYM_THR_16                  0xAF
+#define SYM_THR_17                  0xB0
+#define SYM_THR_18                  0xB1
+
+#define SYM_SCALE_01                0xB8
+#define SYM_SCALE_02                0xB9
+#define SYM_SCALE_03                0xBA
+#define SYM_SCALE_04                0xBB
+#define SYM_SCALE_05                0xBC    
+#define SYM_SCALE_06                0xBD
+#define SYM_SCALE_07                0xBE
+#define SYM_SCALE_08                0xBF    
+#define SYM_SCALE_09                0xC0
+#define SYM_SCALE_10                0xC1
+#define SYM_SCALE_11                0xC2
+#define SYM_SCALE_12                0xC3
+#define SYM_SCALE_13                0xC4
+
+// Christo osd_symbols.h line 200 Contiguous to SYM_LIPO_20 
+#define SYM_LIPO_01                 0xF3
+
+// Christo osd_symbols.h line 203 Contiguous 
+#define SYM_LIION_01                0xD0
+
+// Christo osd_symbols.h line 206 Contiguous
+#define SYM_BATT_00                 0xE2
+
+// Christo osd_symbols.h line 209
+#define SYM_BATT_12                 0xEE
+#define SYM_BATT_FULL_01            0xEF

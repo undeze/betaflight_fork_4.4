@@ -16,6 +16,7 @@
  * along with this software.
  *
  * If not, see <http://www.gnu.org/licenses/>.
+ * Christo 24OCT23
  */
 
 /*
@@ -225,6 +226,10 @@ static unsigned activeOsdElementCount = 0;
 static uint8_t activeOsdElementArray[OSD_ITEM_COUNT];
 static bool backgroundLayerSupported = false;
 
+// Christo
+// static bool christo_osd_change_1 = true;
+// static bool christo_osd_change_2 = false;
+
 // Blink control
 #define OSD_BLINK_FREQUENCY_HZ 2
 static bool blinkState = true;
@@ -235,6 +240,10 @@ static uint32_t blinkBits[(OSD_ITEM_COUNT + 31) / 32];
 #define BLINK(item) (IS_BLINK(item) && blinkState)
 
 enum {UP, DOWN};
+
+// Christo
+static void osdElementAverageLiPoCellVoltage(osdElementParms_t *element);
+static void osdElementAverageLiIonCellVoltage(osdElementParms_t *element);
 
 static int osdDisplayWrite(osdElementParms_t *element, uint8_t x, uint8_t y, uint8_t attr, const char *s)
 {
@@ -749,9 +758,10 @@ static void osdElementUpDownReference(osdElementParms_t *element)
 }
 #endif // USE_ACC
 
+// Christo
 static void osdElementAverageCellVoltage(osdElementParms_t *element)
 {
-    const int cellV = getBatteryAverageCellVoltage();
+    // const int cellV = getBatteryAverageCellVoltage();
     const batteryState_e batteryState = getBatteryState();
 
     switch (batteryState) {
@@ -765,7 +775,128 @@ static void osdElementAverageCellVoltage(osdElementParms_t *element)
         break;
     }
 
-    osdPrintFloat(element->buff, osdGetBatterySymbol(cellV), cellV / 100.0f, "", 2, false, SYM_VOLT);
+    // osdPrintFloat(element->buff, osdGetBatterySymbol(cellV), cellV / 100.0f, "", 2, false, SYM_VOLT);
+
+    int channelData = constrain(rcData[AUX7], PWM_RANGE_MIN, PWM_RANGE_MAX);
+    if (channelData < 1250) // AUX7selects either LiPo or LiIon
+        osdElementAverageLiPoCellVoltage(element);
+    else
+        osdElementAverageLiIonCellVoltage(element);
+}
+
+// Christo osd_elements.c line 757
+static void osdElementAverageLiPoCellVoltage(osdElementParms_t *element)
+{
+    const int cellV = getBatteryAverageCellVoltage();
+    
+    // osdPrintFloat(element->buff, SYM_NONE, cellV / 100.0f, "", 2, false, SYM_VOLT);
+
+    int v = cellV - 345;    // 3.45 volts is the lowest on LiPo scale
+
+    if (v > 0)
+    {
+        int x_shift = element->elemPosX - 3;
+        int y_shift = element->elemPosY; // - 1;
+        
+
+        // LiPo scale
+        for (int i = 0; i < 13; i++)
+            osdDisplayWriteChar(element, x_shift + i, y_shift, DISPLAYPORT_SEVERITY_NORMAL, SYM_LIPO_01 + i);
+
+        int numFullBlocks = v / 6;
+        int finalBlock = (v % 6) * 2;
+
+        int j = 0;
+
+        switch (finalBlock)
+        {
+            case 0:
+            {
+                
+                if ((numFullBlocks - 1) > 0){
+                    while (j < (numFullBlocks - 1)){
+                        osdDisplayWriteChar(element, x_shift + j, y_shift - 1, DISPLAYPORT_SEVERITY_NORMAL, SYM_BATT_FULL_01);
+                        j++;
+                    }
+                    osdDisplayWriteChar(element, x_shift + j, y_shift - 1, DISPLAYPORT_SEVERITY_NORMAL, SYM_BATT_12);
+                } else
+                    osdDisplayWriteChar(element, x_shift, y_shift - 1, DISPLAYPORT_SEVERITY_NORMAL, SYM_BATT_12);
+
+                break;
+            }
+
+            default:
+            {
+                while (j < numFullBlocks)
+                {
+                    osdDisplayWriteChar(element, x_shift +j, y_shift - 1, DISPLAYPORT_SEVERITY_NORMAL, SYM_BATT_FULL_01);
+                        j++;
+                }
+                osdDisplayWriteChar(element, x_shift +j, y_shift - 1, DISPLAYPORT_SEVERITY_NORMAL, SYM_BATT_00 + finalBlock);
+                break;
+            }
+        }
+    }
+    else
+        osdPrintFloat(element->buff, SYM_NONE, cellV / 100.0f, "", 2, false, SYM_VOLT);
+
+}
+
+// Christo osd_elements.c line 815
+static void osdElementAverageLiIonCellVoltage(osdElementParms_t *element)
+{
+    const int cellV = getBatteryAverageCellVoltage();
+    
+    // osdPrintFloat(element->buff, SYM_NONE, cellV / 100.0f, "", 2, false, SYM_VOLT);
+
+    int v = cellV - 271;    // 2.71 volts is the lowest on LiIon scale
+
+    if (v > 0)
+    {
+        int x_shift = element->elemPosX - 4;
+        int y_shift = element->elemPosY; // - 1; // was - 1
+        
+
+        // LiIon scale
+        for (int i = 0; i < 13; i++)
+            osdDisplayWriteChar(element, x_shift + i, y_shift, DISPLAYPORT_SEVERITY_NORMAL, SYM_LIION_01 + i);
+        
+        int numFullBlocks = v / 12;
+        int finalBlock = v % 12;
+
+        int j = 0;
+
+        switch (finalBlock)
+        {
+            case 0:
+            {
+                
+                if ((numFullBlocks - 1) > 0){
+                    while (j < (numFullBlocks - 1)){
+                        osdDisplayWriteChar(element, x_shift + j, y_shift - 1, DISPLAYPORT_SEVERITY_NORMAL, SYM_BATT_FULL_01);
+                        j++;
+                    }
+                    osdDisplayWriteChar(element, x_shift + j, y_shift - 1, DISPLAYPORT_SEVERITY_NORMAL, SYM_BATT_12);
+                } else
+                    osdDisplayWriteChar(element, x_shift, y_shift - 1, DISPLAYPORT_SEVERITY_NORMAL, SYM_BATT_12);
+
+                break;
+            }
+
+            default:
+            {
+                while (j < numFullBlocks)
+                {
+                    osdDisplayWriteChar(element, x_shift +j, y_shift - 1, DISPLAYPORT_SEVERITY_NORMAL, SYM_BATT_FULL_01);
+                        j++;
+                }
+                osdDisplayWriteChar(element, x_shift +j, y_shift - 1, DISPLAYPORT_SEVERITY_NORMAL, SYM_BATT_00 + finalBlock);
+                break;
+            }
+        }
+    }
+    else
+        osdPrintFloat(element->buff, SYM_NONE, cellV / 100.0f, "", 2, false, SYM_VOLT);
 }
 
 static void osdElementCompassBar(osdElementParms_t *element)
