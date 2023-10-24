@@ -87,7 +87,7 @@ upstream	https://github.com/betaflight/betaflight.git (push) <br />
 
 ~/Dev/betaflight$ git pull upstream master
 From https://github.com/betaflight/betaflight
- * branch                master     -> FETCH_HEAD
+\* branch                master     -> FETCH_HEAD
 Already up to date.
 
 ~/Dev/betaflight$ git branch
