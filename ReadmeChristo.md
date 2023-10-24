@@ -85,7 +85,7 @@ origin	https://github.com/undeze/betaflight.git (push) <br />
 upstream	https://github.com/betaflight/betaflight.git (fetch) <br />
 upstream	https://github.com/betaflight/betaflight.git (push) <br />
 
-~/Dev/betaflight$ git pull upstream master
+~/Dev/betaflight$ git pull upstream master <br />
 From https://github.com/betaflight/betaflight <br />
 \* branch                master     -> FETCH_HEAD
 Already up to date.
