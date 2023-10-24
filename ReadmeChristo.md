@@ -79,11 +79,11 @@ See which version the code is: src/main/build/version.h
 
 # Git setup
 
-~/Dev/betaflight$ git remote -v
-origin	https://github.com/undeze/betaflight.git (fetch)
-origin	https://github.com/undeze/betaflight.git (push)
-upstream	https://github.com/betaflight/betaflight.git (fetch)
-upstream	https://github.com/betaflight/betaflight.git (push)
+~/Dev/betaflight$ git remote -v <br />
+origin	https://github.com/undeze/betaflight.git (fetch) <br />
+origin	https://github.com/undeze/betaflight.git (push) <br />
+upstream	https://github.com/betaflight/betaflight.git (fetch) <br />
+upstream	https://github.com/betaflight/betaflight.git (push) <br />
 
 ~/Dev/betaflight$ git pull upstream master
 From https://github.com/betaflight/betaflight
