@@ -34,7 +34,7 @@ bluecast.tech/blog/git-switch-branch/
 
 git init
 
------------------------- Build / Make -----------------------------------
+# Build / Make
 
 https://betaflight.com/docs/development/Building-in-Ubuntu
 
@@ -61,7 +61,7 @@ make TARGET=STM32F7X2 EXTRA_FLAGS="-DUSE_GPS" VERSION="2023-10-24-XXXX"
 But this failed to build.
 
 
---------------- XL7 with MAMBAF722, STM32F7X7 (S7X2) --------------------
+# XL7 with MAMBAF722, STM32F7X7 (S7X2)
 
 /UAV/Betaflight/betaflight$ make clean TARGET=MAMBAF722
 
@@ -69,7 +69,7 @@ But this failed to build.
 
 Flashed the XL7 FC without a full chip erase. All configuration retained.
 
----------------- AOS Falcon 7 with MAMBAF405US_I2C, STM32F405 (S405) -----
+# AOS Falcon 7 with MAMBAF405US_I2C, STM32F405 (S405)
 
 make clean TARGET=STM32F405
 
@@ -77,7 +77,7 @@ make TARGET=STM32F405 REVISION="2022-09-15-1407"
 
 See which version the code is: src/main/build/version.h
 
-----------------------------git-------------------------------------------
+# Git setup
 
 ~/Dev/betaflight$ git remote -v
 origin	https://github.com/undeze/betaflight.git (fetch)
@@ -98,7 +98,7 @@ Already up to date.
 Switched to branch 'Christo.4.4.2'
 Your branch is up to date with 'origin/Christo.4.4.2'.
 
-------------------------------Fork----------------------------------------
+# Fork
 
 https://docs.github.com/en/get-started/quickstart/fork-a-repo
 
