@@ -90,9 +90,9 @@ From https://github.com/betaflight/betaflight <br />
 \* branch                master     -> FETCH_HEAD
 Already up to date.
 
-~/Dev/betaflight$ git branch
+~/Dev/betaflight$ git branch <br />
   Christo.4.4.2
-* master
+\* master
 
 ~/Dev/betaflight$ git switch Christo.4.4.2 
 Switched to branch 'Christo.4.4.2'
