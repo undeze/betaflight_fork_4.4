@@ -91,7 +91,7 @@ From https://github.com/betaflight/betaflight <br />
 Already up to date.
 
 ~/Dev/betaflight$ git branch <br />
-  Christo.4.4.2
+  Christo.4.4.2 <br />
 \* master
 
 ~/Dev/betaflight$ git switch Christo.4.4.2 
