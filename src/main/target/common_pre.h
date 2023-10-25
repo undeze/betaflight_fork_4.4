@@ -354,16 +354,16 @@ extern uint8_t _dmaram_end__;
 #define USE_PINIO
 
 #if !defined(USE_SERIAL_RX)
-
+// Christo
 #define USE_SERIALRX
 #define USE_SERIALRX_CRSF       // Team Black Sheep Crossfire protocol
-#define USE_SERIALRX_GHST       // ImmersionRC Ghost Protocol
-#define USE_SERIALRX_IBUS       // FlySky and Turnigy receivers
-#define USE_SERIALRX_SBUS       // Frsky and Futaba receivers
-#define USE_SERIALRX_SPEKTRUM   // SRXL, DSM2 and DSMX protocol
-#define USE_SERIALRX_FPORT      // FrSky FPort
-#define USE_SERIALRX_XBUS       // JR
-#define USE_SERIALRX_SRXL2      // Spektrum SRXL2 protocol
+// #define USE_SERIALRX_GHST       // ImmersionRC Ghost Protocol
+// #define USE_SERIALRX_IBUS       // FlySky and Turnigy receivers
+// #define USE_SERIALRX_SBUS       // Frsky and Futaba receivers
+// #define USE_SERIALRX_SPEKTRUM   // SRXL, DSM2 and DSMX protocol
+// #define USE_SERIALRX_FPORT      // FrSky FPort
+// #define USE_SERIALRX_XBUS       // JR
+// #define USE_SERIALRX_SRXL2      // Spektrum SRXL2 protocol
 
 #endif // !defined(USE_SERIAL_RX)
 

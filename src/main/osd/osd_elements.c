@@ -1642,9 +1642,150 @@ static void osdElementStickOverlay(osdElementParms_t *element)
 }
 #endif // USE_OSD_STICK_OVERLAY
 
+// static void osdElementThrottlePosition(osdElementParms_t *element)
+// {
+//     tfp_sprintf(element->buff, "%c%3d", SYM_THR, calculateThrottlePercent());
+// }
+
+// Christo osd_elements.c line 1547
 static void osdElementThrottlePosition(osdElementParms_t *element)
 {
+    uint8_t percent = calculateThrottlePercent();
+
     tfp_sprintf(element->buff, "%c%3d", SYM_THR, calculateThrottlePercent());
+
+    // int channelData = constrain(rcData[AUX6], PWM_RANGE_MIN, PWM_RANGE_MAX); // Christo
+    // tfp_sprintf(element->buff, "%c%3d", SYM_THR, channelData);  // Christo
+
+    int x_shift = 1;
+    int y_shift = percent/18;
+    
+    int y20 = (y_shift * 2) + 1;
+    int y21 = y20 + 1;
+
+    int ones = percent % 18;
+    switch (ones)
+    {
+        case 1:
+        {
+            osdDisplayWriteChar(element, element->elemPosX + x_shift, element->elemPosY - y20, DISPLAYPORT_SEVERITY_NORMAL, SYM_THR_01);
+            break;
+        }
+        case 2:
+        {
+            osdDisplayWriteChar(element, element->elemPosX + x_shift, element->elemPosY - y20, DISPLAYPORT_SEVERITY_NORMAL, SYM_THR_02);
+            break;
+        }
+        case 3:
+        {
+            osdDisplayWriteChar(element, element->elemPosX + x_shift, element->elemPosY - y20, DISPLAYPORT_SEVERITY_NORMAL, SYM_THR_03);
+            break;
+        }
+        case 4:
+        {
+            osdDisplayWriteChar(element, element->elemPosX + x_shift, element->elemPosY - y20, DISPLAYPORT_SEVERITY_NORMAL, SYM_THR_04);
+            break;
+        }
+        case 5:
+        {
+            osdDisplayWriteChar(element, element->elemPosX + x_shift, element->elemPosY - y20, DISPLAYPORT_SEVERITY_NORMAL, SYM_THR_05);
+            break;
+        }
+        case 6:
+        {
+            osdDisplayWriteChar(element, element->elemPosX + x_shift, element->elemPosY - y20, DISPLAYPORT_SEVERITY_NORMAL, SYM_THR_06);
+            break;
+        }
+        case 7:
+        {
+            osdDisplayWriteChar(element, element->elemPosX + x_shift, element->elemPosY - y20, DISPLAYPORT_SEVERITY_NORMAL, SYM_THR_07);
+            break;
+        }
+        case 8:
+        {
+            osdDisplayWriteChar(element, element->elemPosX + x_shift, element->elemPosY - y20, DISPLAYPORT_SEVERITY_NORMAL, SYM_THR_08);
+            break;
+        }
+        case 9:
+        {
+            osdDisplayWriteChar(element, element->elemPosX + x_shift, element->elemPosY - y20, DISPLAYPORT_SEVERITY_NORMAL, SYM_THR_09);
+            break;
+        }
+        case 10:
+        {
+            osdDisplayWriteChar(element, element->elemPosX + x_shift, element->elemPosY - y20, DISPLAYPORT_SEVERITY_NORMAL, SYM_THR_09);
+            osdDisplayWriteChar(element, element->elemPosX + x_shift, element->elemPosY - y21, DISPLAYPORT_SEVERITY_NORMAL, SYM_THR_10);
+            break;
+        }
+        case 11:
+        {
+            osdDisplayWriteChar(element, element->elemPosX + x_shift, element->elemPosY - y20, DISPLAYPORT_SEVERITY_NORMAL, SYM_THR_09);
+            osdDisplayWriteChar(element, element->elemPosX + x_shift, element->elemPosY - y21, DISPLAYPORT_SEVERITY_NORMAL, SYM_THR_11);
+            break;
+        }
+        case 12:
+        {
+            osdDisplayWriteChar(element, element->elemPosX + x_shift, element->elemPosY - y20, DISPLAYPORT_SEVERITY_NORMAL, SYM_THR_09);
+            osdDisplayWriteChar(element, element->elemPosX + x_shift, element->elemPosY - y21, DISPLAYPORT_SEVERITY_NORMAL, SYM_THR_12);
+            break;
+        }
+        case 13:
+        {
+            osdDisplayWriteChar(element, element->elemPosX + x_shift, element->elemPosY - y20, DISPLAYPORT_SEVERITY_NORMAL, SYM_THR_09);
+            osdDisplayWriteChar(element, element->elemPosX + x_shift, element->elemPosY - y21, DISPLAYPORT_SEVERITY_NORMAL, SYM_THR_13);
+            break;
+        }
+        case 14:
+        {
+            osdDisplayWriteChar(element, element->elemPosX + x_shift, element->elemPosY - y20, DISPLAYPORT_SEVERITY_NORMAL, SYM_THR_09);
+            osdDisplayWriteChar(element, element->elemPosX + x_shift, element->elemPosY - y21, DISPLAYPORT_SEVERITY_NORMAL, SYM_THR_14);
+            break;
+        }
+        case 15:
+        {
+            osdDisplayWriteChar(element, element->elemPosX + x_shift, element->elemPosY - y20, DISPLAYPORT_SEVERITY_NORMAL, SYM_THR_09);
+            osdDisplayWriteChar(element, element->elemPosX + x_shift, element->elemPosY - y21, DISPLAYPORT_SEVERITY_NORMAL, SYM_THR_15);
+            break;
+        }
+        case 16:
+        {
+            osdDisplayWriteChar(element, element->elemPosX + x_shift, element->elemPosY - y20, DISPLAYPORT_SEVERITY_NORMAL, SYM_THR_09);
+            osdDisplayWriteChar(element, element->elemPosX + x_shift, element->elemPosY - y21, DISPLAYPORT_SEVERITY_NORMAL, SYM_THR_16);
+            break;
+        }
+         case 17:
+        {
+            osdDisplayWriteChar(element, element->elemPosX + x_shift, element->elemPosY - y20, DISPLAYPORT_SEVERITY_NORMAL, SYM_THR_09);
+            osdDisplayWriteChar(element, element->elemPosX + x_shift, element->elemPosY - y21, DISPLAYPORT_SEVERITY_NORMAL, SYM_THR_17);
+            break;
+        }
+
+    }
+
+    if (y_shift >= 1){
+        for (int yi= 0; yi < y_shift; yi++)
+        {
+            osdDisplayWriteChar(element, element->elemPosX + x_shift, element->elemPosY - ((yi*2) + 1), DISPLAYPORT_SEVERITY_NORMAL, SYM_THR_09);
+            osdDisplayWriteChar(element, element->elemPosX + x_shift, element->elemPosY - ((yi*2) + 2), DISPLAYPORT_SEVERITY_NORMAL, SYM_THR_18);
+        }
+    }
+
+    int x_shift_1 = x_shift + 1;
+    osdDisplayWriteChar(element, element->elemPosX + x_shift_1, element->elemPosY,  DISPLAYPORT_SEVERITY_NORMAL, SYM_SCALE_01);
+    osdDisplayWriteChar(element, element->elemPosX + x_shift_1, element->elemPosY - 1, DISPLAYPORT_SEVERITY_NORMAL, SYM_SCALE_02);
+    osdDisplayWriteChar(element, element->elemPosX + x_shift_1, element->elemPosY - 2, DISPLAYPORT_SEVERITY_NORMAL, SYM_SCALE_03);
+    osdDisplayWriteChar(element, element->elemPosX + x_shift_1, element->elemPosY - 3, DISPLAYPORT_SEVERITY_NORMAL, SYM_SCALE_04);
+    osdDisplayWriteChar(element, element->elemPosX + x_shift_1, element->elemPosY - 4, DISPLAYPORT_SEVERITY_NORMAL, SYM_SCALE_05);
+    osdDisplayWriteChar(element, element->elemPosX + x_shift_1, element->elemPosY - 5, DISPLAYPORT_SEVERITY_NORMAL, SYM_SCALE_06);
+    osdDisplayWriteChar(element, element->elemPosX + x_shift_1, element->elemPosY - 6, DISPLAYPORT_SEVERITY_NORMAL, SYM_SCALE_07);
+    osdDisplayWriteChar(element, element->elemPosX + x_shift_1, element->elemPosY - 7, DISPLAYPORT_SEVERITY_NORMAL, SYM_SCALE_08);
+    osdDisplayWriteChar(element, element->elemPosX + x_shift_1, element->elemPosY - 8, DISPLAYPORT_SEVERITY_NORMAL, SYM_SCALE_09);
+    osdDisplayWriteChar(element, element->elemPosX + x_shift_1, element->elemPosY - 9, DISPLAYPORT_SEVERITY_NORMAL, SYM_SCALE_10);
+    osdDisplayWriteChar(element, element->elemPosX + x_shift_1, element->elemPosY - 10, DISPLAYPORT_SEVERITY_NORMAL, SYM_SCALE_11);
+    osdDisplayWriteChar(element, element->elemPosX + x_shift_1, element->elemPosY - 11, DISPLAYPORT_SEVERITY_NORMAL, SYM_SCALE_12);
+    osdDisplayWriteChar(element, element->elemPosX + x_shift_1, element->elemPosY - 12, DISPLAYPORT_SEVERITY_NORMAL, SYM_SCALE_13);
+    
+    
 }
 
 static void osdElementTimer(osdElementParms_t *element)
