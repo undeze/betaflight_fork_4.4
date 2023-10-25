@@ -201,10 +201,10 @@ static void setReturnAltitude(void)
             case GPS_RESCUE_ALT_MODE_FIXED:
                 rescueState.intent.returnAltitudeCm = initialAltitudeCm;
                 break;
-            case GPS_RESCUE_ALT_MODE_CURRENT:
+            case GPS_RESCUE_ALT_MODE_CURRENT: // Christo: Consider the case where the drone is flying below you, e.g. in a valley
                 rescueState.intent.returnAltitudeCm = rescueState.sensor.currentAltitudeCm + rescueAltitudeBufferCm;
                 break;
-            case GPS_RESCUE_ALT_MODE_MAX:
+            case GPS_RESCUE_ALT_MODE_MAX: // Christo: Consider the case where the drone is 1,000 meters below its max altitude.
             default:
                 rescueState.intent.returnAltitudeCm = rescueState.intent.maxAltitudeCm + rescueAltitudeBufferCm;
                 break;
