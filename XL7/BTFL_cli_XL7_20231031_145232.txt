@@ -3,7 +3,7 @@
 # diff all
 
 # version
-# Betaflight / STM32F7X2 (S7X2) 4.4.2 Oct 26 2023 / 08:57:40 (norevision) MSP API: 1.45
+# Betaflight / STM32F7X2 (S7X2) 4.4.2 Oct 31 2023 / 13:46:16 (norevision) MSP API: 1.45
 
 # config: YES
 
@@ -163,14 +163,18 @@ set beeper_od = OFF
 set yaw_motors_reversed = ON
 set small_angle = 180
 set gps_set_home_point_once = ON
-set gps_rescue_min_start_dist = 30
+set gps_rescue_min_start_dist = 29
 set gps_rescue_alt_mode = CURRENT_ALT
-set gps_rescue_ascend_rate = 500
-set gps_rescue_ground_speed = 1500
-set gps_rescue_descent_dist = 150
+set gps_rescue_ascend_rate = 501
+set gps_rescue_return_alt = 28
+set gps_rescue_ground_speed = 1551
+set gps_rescue_max_angle = 46
+set gps_rescue_descent_dist = 149
+set gps_rescue_descend_rate = 151
 set gps_rescue_landing_alt = 5
-set gps_rescue_throttle_max = 1400
-set gps_rescue_throttle_hover = 1280
+set gps_rescue_throttle_min = 1099
+set gps_rescue_throttle_max = 1501
+set gps_rescue_throttle_hover = 1281
 set gps_rescue_min_sats = 6
 set gps_rescue_allow_arming_without_fix = ON
 set gps_rescue_throttle_p = 150

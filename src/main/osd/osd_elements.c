@@ -226,10 +226,6 @@ static unsigned activeOsdElementCount = 0;
 static uint8_t activeOsdElementArray[OSD_ITEM_COUNT];
 static bool backgroundLayerSupported = false;
 
-// Christo
-// static bool christo_osd_change_1 = true;
-// static bool christo_osd_change_2 = false;
-
 // Blink control
 #define OSD_BLINK_FREQUENCY_HZ 2
 static bool blinkState = true;
@@ -1126,7 +1122,10 @@ static void osdElementFlymode(osdElementParms_t *element)
     if (FLIGHT_MODE(FAILSAFE_MODE)) {
         strcpy(element->buff, "!FS!");
     } else if (FLIGHT_MODE(GPS_RESCUE_MODE)) {
-        strcpy(element->buff, "RESC");
+        // strcpy(element->buff, "RESC");
+        int32_t rescueStatePhase = getRescueStatePhase();   // Christo :)
+        int32_t rescueAltitude = getNewRescueAltitudeM();   // Christo
+        tfp_sprintf(element->buff, "RESC#%d %d%c",rescueStatePhase, rescueAltitude, SYM_M);
     } else if (FLIGHT_MODE(HEADFREE_MODE)) {
         strcpy(element->buff, "HEAD");
     } else if (FLIGHT_MODE(ANGLE_MODE)) {

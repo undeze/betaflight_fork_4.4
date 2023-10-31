@@ -58,3 +58,6 @@ bool gpsRescueIsAvailable(void);
 bool gpsRescueIsDisabled(void);
 bool gpsRescueDisableMag(void);
 float gpsRescueGetImuYawCogGain(void);
+
+int32_t getNewRescueAltitudeM(void);    // Christo
+int32_t getRescueStatePhase(void);      // Christo

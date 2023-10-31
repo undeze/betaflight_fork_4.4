@@ -202,7 +202,8 @@ static void setReturnAltitude(void)
                 rescueState.intent.returnAltitudeCm = initialAltitudeCm;
                 break;
             case GPS_RESCUE_ALT_MODE_CURRENT: // Christo: Consider the case where the drone is flying below you, e.g. in a valley
-                rescueState.intent.returnAltitudeCm = rescueState.sensor.currentAltitudeCm + rescueAltitudeBufferCm;
+                // rescueState.intent.returnAltitudeCm = rescueState.sensor.currentAltitudeCm + rescueAltitudeBufferCm;
+                rescueState.intent.returnAltitudeCm = MAX(rescueState.sensor.currentAltitudeCm + rescueAltitudeBufferCm, rescueAltitudeBufferCm); //Christo
                 break;
             case GPS_RESCUE_ALT_MODE_MAX: // Christo: Consider the case where the drone is 1,000 meters below its max altitude.
             default:
@@ -962,3 +963,14 @@ bool gpsRescueDisableMag(void)
 }
 #endif
 #endif
+
+int32_t getNewRescueAltitudeM(void)   // Christo
+{
+    int32_t newRescueAltitudeM = rescueState.intent.returnAltitudeCm / 100.0f;
+    return newRescueAltitudeM;
+}
+
+int32_t getRescueStatePhase(void) // Christo
+{
+    return rescueState.phase;
+}
