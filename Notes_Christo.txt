@@ -7,3 +7,19 @@ MSU
 HORIZON_MODE
 
 attitude.values.yaw
+
+ENABLE_FLIGHT_MODE(HORIZON_MODE)
+
+rcCommandBuff.X = rcCommand[ROLL];
+rcCommandBuff.Y = rcCommand[PITCH];
+
+rcCommand
+
+pitchAdjustment
+
+gpsRescueAngle[AI_PITCH] = pitchAdjustmentFiltered;
+
+// cut pitch angle by up to half when groundspeed error is high
+// minimises flyaway velocity, but reduces ability to handle high wind
+// groundspeedErrorRatio falls towards zero as the forward speed vector matches the correct path
+rescueState.sensor.groundspeedPitchAttenuator = 1.0f / fminf(groundspeedErrorRatio, 2.0f);
