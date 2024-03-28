@@ -7,7 +7,7 @@ git commit -m 'message'
 git push bitbucket
 
 git status
-Shows which is he current branch.
+Shows which is the current branch.
 Shows if there is something to commit. 
 
 git log			(quit with q)

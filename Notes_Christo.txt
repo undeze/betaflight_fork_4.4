@@ -1,7 +1,7 @@
 CMS 	Configuration Menu
 PG		Parameter Group
 MCS		Mass Storage Controller
-MSP
+MSP		MultiWii Serial Protocol
 MSU
 
 HORIZON_MODE
